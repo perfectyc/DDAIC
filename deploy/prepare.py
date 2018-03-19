@@ -20,7 +20,7 @@ class TestDeployContext():
         self.args.solc = determine_binary(args.solc, 'solc', True)
 
     def compile_contract(self, contract_name):
-        if self.args.no_limits and contract_name == "DAO.sol":
+        if self.args.no_limits and contract_name == "DDAIC.sol":
             contract_path = edit_dao_source(
                 self.args.contracts_dir,
                 False,  # keep limits
@@ -48,7 +48,7 @@ class TestDeployContext():
 
     def cleanup(self):
         try:
-            rm_file(os.path.join(self.args.contracts_dir, "DAOcopy.sol"))
+            rm_file(os.path.join(self.args.contracts_dir, "DDAICcopy.sol"))
             rm_file(
                 os.path.join(self.args.contracts_dir, "TokenCreationCopy.sol")
             )
@@ -57,7 +57,7 @@ class TestDeployContext():
 
 
 if __name__ == "__main__":
-    p = argparse.ArgumentParser(description='DAO deployment script')
+    p = argparse.ArgumentParser(description='DDAIC deployment script')
     p.add_argument(
         '--solc',
         help='Full path to the solc binary to use'
@@ -66,7 +66,7 @@ if __name__ == "__main__":
         '--creation-duration-mins',
         type=int,
         default=60,
-        help='Deployed DAO creation duration in minutes'
+        help='Deployed DDAIC creation duration in minutes'
     )
     p.add_argument(
         '--contracts-dir',
@@ -76,7 +76,7 @@ if __name__ == "__main__":
     p.add_argument(
         '--no-limits',
         action='store_true',
-        help='If given then a version of DAO.sol without limits is compiled'
+        help='If given then a version of DDAIC.sol without limits is compiled'
     )
     p.add_argument(
         '--curator',
@@ -87,7 +87,7 @@ if __name__ == "__main__":
         '--default-proposal-deposit',
         type=int,
         default=1,
-        help='The proposal deposit (in ether) for every proposal of the DAO'
+        help='The proposal deposit (in ether) for every proposal of the DDAIC'
     )
     p.add_argument(
         '--split-execution-period',
@@ -139,22 +139,22 @@ if __name__ == "__main__":
     )
     p.add_argument(
         '--offer-client-dao-address',
-        default="0x159fe90ac850c895e4fd144e705923cfa042d974",  # A testnet DAO
-        help='The address of the DAO to set as the client of the SampleOffer'
+        default="0x159fe90ac850c895e4fd144e705923cfa042d974",  # A testnet DDAIC
+        help='The address of the DDAIC to set as the client of the SampleOffer'
     )
     args = p.parse_args()
     ctx = TestDeployContext(args)
-    comp = ctx.compile_contract("DAO.sol")
+    comp = ctx.compile_contract("DDAIC.sol")
     comp2 = ctx.compile_contract("SampleOffer.sol")
 
     with open("prepare.js", "w") as f:
-        f.write("dao_abi = {};\n".format(comp['contracts']['DAO']['abi']))
-        f.write("dao_bin = '{}';\n".format(comp['contracts']['DAO']['bin']))
+        f.write("dao_abi = {};\n".format(comp['contracts']['DDAIC']['abi']))
+        f.write("dao_bin = '{}';\n".format(comp['contracts']['DDAIC']['bin']))
         f.write("creator_abi = {};\n".format(
-          comp['contracts']['DAO_Creator']['abi'])
+          comp['contracts']['DDAIC_Creator']['abi'])
         )
         f.write("creator_bin = '{}';\n".format(
-          comp['contracts']['DAO_Creator']['bin'])
+          comp['contracts']['DDAIC_Creator']['bin'])
         )
         f.write("offer_abi = {};\n".format(
             comp2['contracts']['SampleOffer']['abi'])
