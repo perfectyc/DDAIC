@@ -1,18 +1,18 @@
 /*
-This file is part of the DAO.
+This file is part of the DDAIC.
 
-The DAO is free software: you can redistribute it and/or modify
+The DDAIC is free software: you can redistribute it and/or modify
 it under the terms of the GNU lesser General Public License as published by
 the Free Software Foundation, either version 3 of the License, or
 (at your option) any later version.
 
-The DAO is distributed in the hope that it will be useful,
+The DDAIC is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU lesser General Public License for more details.
 
 You should have received a copy of the GNU lesser General Public License
-along with the DAO.  If not, see <http://www.gnu.org/licenses/>.
+along with the DDAIC.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 
@@ -30,12 +30,12 @@ along with the DAO.  If not, see <http://www.gnu.org/licenses/>.
 
 import "./TokenCreation.sol";
 
-contract DAOTokenCreationProxyTransferer {
+contract DDAIC TokenCreationProxyTransferer {
     address public owner;
     address public dao;
 
     //constructor
-    function DAOTokenCreationProxyTransferer(address _owner, address _dao) {
+    function DDAIC TokenCreationProxyTransferer(address _owner, address _dao) {
         owner = _owner;
         dao = _dao;
 
