@@ -1,5 +1,5 @@
 // first run prepare.js to import the compiled source code and some other helper variables
-// before you do that run prepare.py to compile the latest version of the software in DAO
+// before you do that run prepare.py to compile the latest version of the software in DDAIC
 // and populate the helper variables
 
 personal.unlockAccount(eth.accounts[0]);
@@ -8,7 +8,7 @@ var min_tokens_to_create = 1;
 var closing_time = Math.floor(Date.now() / 1000) + seconds_from_now;
 
 var creatorContract = web3.eth.contract(creator_abi);
-console.log("Creating DAOCreator Contract");
+console.log("Creating DDAICreator Contract");
 var _daoCreatorContract = creatorContract.new(
     {
 	    from: web3.eth.accounts[0],
@@ -16,9 +16,9 @@ var _daoCreatorContract = creatorContract.new(
 	    gas: 4000000
     }, function (e, contract){
 	    if (e) {
-            console.log(e+ " at DAOCreator creation!");
+            console.log(e+ " at DDAICreator creation!");
 	    } else if (typeof contract.address != 'undefined') {
-            console.log("Creating the actual DAO");
+            console.log("Creating the actual DDAIC");
             var dao = daoContract.new(
 	            curator,
 	            contract.address,
@@ -32,9 +32,9 @@ var _daoCreatorContract = creatorContract.new(
 		            gas: 4000000
 		        }, function (e, our_contract) {
 		            // funny thing, without this geth hangs
-		            console.log("At DAO creation callback");
+		            console.log("At DDAIC creation callback");
 		            if (typeof our_contract.address != 'undefined') {
-                        console.log("our new DAO address is: " + our_contract.address);
+                        console.log("our new DDAIC address is: " + our_contract.address);
 		            }
 		        });
 
